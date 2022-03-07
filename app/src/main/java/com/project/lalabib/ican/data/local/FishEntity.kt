@@ -1,4 +1,4 @@
-package com.project.lalabib.ican.data.lcoal
+package com.project.lalabib.ican.data.local
 
 data class FishEntity (
     var uuid: String,
