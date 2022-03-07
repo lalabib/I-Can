@@ -39,10 +39,12 @@ class DashboardFragment : Fragment() {
 
         //show data
         if (activity != null) {
+            showLoading(true)
 
             viewModel.getFishDashboard().observe(viewLifecycleOwner) { fish ->
                 fishAdapter.setFish(fish)
                 fishAdapter.notifyDataSetChanged()
+                showLoading(false)
             }
 
             dashboardBinding.apply {
@@ -51,6 +53,10 @@ class DashboardFragment : Fragment() {
                 rvDashboard.adapter = fishAdapter
             }
         }
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        dashboardBinding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 
     override fun onDestroyView() {

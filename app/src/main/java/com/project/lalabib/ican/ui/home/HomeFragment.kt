@@ -46,6 +46,7 @@ class HomeFragment : Fragment() {
 
         //show data
         if (activity != null) {
+            showLoading(true)
 
             val factory = ViewModelFactory.getInstance()
             val viewModel = ViewModelProvider(this, factory)[HomeViewModel::class.java]
@@ -55,6 +56,7 @@ class HomeFragment : Fragment() {
             viewModel.getFishs().observe(viewLifecycleOwner) { fish ->
                 fishAdapter.setFish(fish)
                 fishAdapter.notifyDataSetChanged()
+                showLoading(false)
             }
 
             homeContentBinding.apply {
@@ -63,6 +65,10 @@ class HomeFragment : Fragment() {
                 rvBestSeller.adapter = fishAdapter
             }
         }
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        homeContentBinding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 
     override fun onDestroyView() {
