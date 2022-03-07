@@ -12,4 +12,6 @@
     <string name="price">30000</string>
     <string name="weight">15</string>
     <string name="kg">kg</string>
+
+    <string name="error_message">Terjadi Kesalahan</string>
 </resources>

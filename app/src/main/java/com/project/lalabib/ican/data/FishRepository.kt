@@ -22,7 +22,7 @@ class FishRepository private constructor(
             }
             override fun shouldFetch(data: List<FishEntity>?): Boolean =
                 //data == null || data.isEmpty()
-                true
+                true //replace it with true if you want to always retrieve data from the internet
 
             public override fun createCall(): LiveData<ApiResponse<List<FishEntity>>> =
                 remoteDataSource.getFish()

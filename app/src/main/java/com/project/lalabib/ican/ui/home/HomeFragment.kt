@@ -1,9 +1,11 @@
 package com.project.lalabib.ican.ui.home
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,6 +15,7 @@ import com.project.lalabib.ican.R
 import com.project.lalabib.ican.databinding.ContentHomeBinding
 import com.project.lalabib.ican.databinding.FragmentHomeBinding
 import com.project.lalabib.ican.ui.adapter.FishAdapter
+import com.project.lalabib.ican.utils.Status
 import com.project.lalabib.ican.viewmodel.ViewModelFactory
 
 class HomeFragment : Fragment() {
@@ -30,6 +33,7 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -48,15 +52,27 @@ class HomeFragment : Fragment() {
         if (activity != null) {
             showLoading(true)
 
-            val factory = ViewModelFactory.getInstance()
+            val factory = ViewModelFactory.getInstance(requireActivity())
             val viewModel = ViewModelProvider(this, factory)[HomeViewModel::class.java]
-
             val fishAdapter = FishAdapter()
 
-            viewModel.getFishs().observe(viewLifecycleOwner) { fish ->
-                fishAdapter.setFish(fish)
-                fishAdapter.notifyDataSetChanged()
-                showLoading(false)
+            viewModel.getFish().observe(viewLifecycleOwner) { fish ->
+                if (fish != null) {
+                    when (fish.status) {
+                        Status.LOADING -> {
+                            showLoading(true)
+                        }
+                        Status.SUCCESS -> {
+                            showLoading(false)
+                            fish.data?.let { fishAdapter.setFish(it) }
+                            fishAdapter.notifyDataSetChanged()
+                        }
+                        Status.ERROR -> {
+                            showLoading(false)
+                            Toast.makeText(context, R.string.error_message, Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
             }
 
             homeContentBinding.apply {
