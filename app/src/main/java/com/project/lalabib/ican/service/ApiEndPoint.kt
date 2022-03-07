@@ -1,6 +1,6 @@
 package com.project.lalabib.ican.service
 
-import com.project.lalabib.ican.data.local.FishEntity
+import com.project.lalabib.ican.data.local.entity.FishEntity
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query

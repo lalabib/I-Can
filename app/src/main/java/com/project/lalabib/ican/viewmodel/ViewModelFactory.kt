@@ -1,5 +1,6 @@
 package com.project.lalabib.ican.viewmodel
 
+import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.project.lalabib.ican.data.FishRepository
@@ -14,10 +15,10 @@ class ViewModelFactory private constructor(private val fishRepository: FishRepos
         @Volatile
         private var instance: ViewModelFactory? = null
 
-        fun getInstance(): ViewModelFactory =
+        fun getInstance(context: Context): ViewModelFactory =
             instance ?: synchronized(this) {
                 instance
-                    ?: ViewModelFactory(Injection.provideRepository()).apply { instance = this }
+                    ?: ViewModelFactory(Injection.provideRepository(context)).apply { instance = this }
             }
     }
 

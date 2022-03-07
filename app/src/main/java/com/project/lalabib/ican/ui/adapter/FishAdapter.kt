@@ -3,7 +3,7 @@ package com.project.lalabib.ican.ui.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.project.lalabib.ican.data.local.FishEntity
+import com.project.lalabib.ican.data.local.entity.FishEntity
 import com.project.lalabib.ican.databinding.ItemListBinding
 
 class FishAdapter :  RecyclerView.Adapter<FishAdapter.FishViewHolder>() {
