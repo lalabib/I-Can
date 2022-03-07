@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.project.lalabib.ican.data.FishRepository
 import com.project.lalabib.ican.di.Injection
+import com.project.lalabib.ican.ui.dashboard.DashboardViewModel
 import com.project.lalabib.ican.ui.home.HomeViewModel
 
 class ViewModelFactory private constructor(private val fishRepository: FishRepository)
@@ -25,6 +26,9 @@ class ViewModelFactory private constructor(private val fishRepository: FishRepos
         return when {
             modelClass.isAssignableFrom(HomeViewModel::class.java) -> {
                 HomeViewModel(fishRepository) as T
+            }
+            modelClass.isAssignableFrom(DashboardViewModel::class.java) -> {
+                DashboardViewModel(fishRepository) as T
             }
             else -> throw Throwable("Unknown ViewModel Class: " + modelClass.name)
         }
