@@ -1,0 +1,1 @@
+I made a design like this because coincidentally a few days ago my friend had made an application design like this and because I was confused about what design it looked like, That's why I used the design and of course had permission beforehand.
