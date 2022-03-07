@@ -6,6 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.denzcoskun.imageslider.constants.ScaleTypes
+import com.denzcoskun.imageslider.models.SlideModel
+import com.project.lalabib.ican.R
 import com.project.lalabib.ican.databinding.ContentHomeBinding
 import com.project.lalabib.ican.databinding.FragmentHomeBinding
 
@@ -28,6 +31,15 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         homeContentBinding = binding.contentHome
+
+        //image slide show
+        val imageList = ArrayList<SlideModel>()
+
+        imageList.add(SlideModel(R.drawable.iklan, ScaleTypes.CENTER_CROP))
+        imageList.add(SlideModel(R.drawable.iklan2, ScaleTypes.CENTER_CROP))
+
+        val imageSlider = homeContentBinding.imageSlider
+        imageSlider.setImageList(imageList)
     }
 
     override fun onDestroyView() {
