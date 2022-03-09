@@ -5,10 +5,10 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "fish_entities")
 data class FishEntity (
-    @PrimaryKey
-    val uuid: String,
 
-    val komoditas: String?,
+    val uuid: String?,
+    @PrimaryKey
+    val komoditas: String,
     val area_provinsi: String?,
     val size: String?,
     val price: String?
